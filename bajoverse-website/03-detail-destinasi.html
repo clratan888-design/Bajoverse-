@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Destinasi — Bajoverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242C; --ink-soft:#3C5560;
+  --pink:#F2A6A0; --pink-deep:#E3857D; --pink-soft:#FBE4DE;
+  --teal:#1F6F72; --teal-deep:#0F4749;
+  --sand:#F6ECDD; --coral:#E76F51; --white:#FFFDF9;
+  --line: rgba(22,36,44,0.12);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+.coord{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal-deep);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;display:flex;align-items:center;gap:8px;}
+.logo span{color:var(--coral);font-style:italic;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a:hover{color:var(--coral);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.lang-switch{font-size:13px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:6px 14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--white);padding:11px 22px;border-radius:30px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,111,114,0.3);}
+.btn.outline{background:transparent;color:var(--ink);border:1.4px solid var(--ink);}
+.btn.outline:hover{background:var(--ink);color:var(--white);box-shadow:none;}
+.btn.coral{background:var(--coral);}
+.btn.coral:hover{box-shadow:0 10px 22px rgba(231,111,81,0.35);}
+.btn.small{padding:8px 16px;font-size:12.5px;}
+
+.breadcrumb{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;padding:20px 32px 0;max-width:1180px;margin:0 auto;}
+.breadcrumb span{color:var(--ink);font-weight:600;}
+
+.section{padding:64px 32px;}
+.section.tint{background:var(--sand);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+.sec-head h1,.sec-head h2{font-size:34px;max-width:600px;}
+.sec-head p{color:var(--ink-soft);font-size:15px;max-width:360px;line-height:1.6;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:30px;background:var(--pink-soft);color:var(--pink-deep);font-weight:700;font-size:12.5px;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 32px 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;}
+.foot-grid h5{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;}
+
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--pink-soft);color:var(--pink-deep);}
+.tag.teal{background:#E4F1F0;color:var(--teal-deep);}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+
+
+.dhero{height:360px;position:relative;overflow:hidden;}
+.dhero svg{width:100%;height:100%;}
+.dhero-info{position:absolute;bottom:0;left:0;right:0;padding:28px 32px;background:linear-gradient(0deg, rgba(15,71,73,0.75), transparent);color:#fff;}
+.dhero-info .coord{color:var(--pink);}
+.dhero-info h1{font-size:38px;color:#fff;margin:6px 0;}
+.rating-row{display:flex;gap:14px;align-items:center;font-size:13.5px;margin-top:6px;}
+.d-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;max-width:1180px;margin:0 auto;padding:40px 32px;}
+.tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin-bottom:24px;}
+.tab{padding:10px 2px;font-size:14px;font-weight:700;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;}
+.tab.active{color:var(--ink);border-color:var(--coral);}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+.info-box{background:var(--sand);border-radius:14px;padding:16px;text-align:center;}
+.info-box b{display:block;font-family:'Fraunces',serif;font-size:20px;}
+.info-box span{font-size:11.5px;color:var(--ink-soft);}
+.gallery-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0;}
+.gallery-strip svg{border-radius:12px;width:100%;height:90px;}
+.sidebar-card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px;position:sticky;top:90px;}
+.sidebar-card h4{font-size:16px;margin-bottom:14px;}
+.side-row{display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-bottom:1px solid var(--line);}
+.side-row:last-of-type{border-bottom:none;}
+.related-row{display:flex;gap:14px;margin-top:20px;}
+.related-card{flex:1;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.related-card svg{width:100%;height:70px;}
+.related-card p{font-size:12px;font-weight:700;padding:8px 10px;margin:0;}
+@media(max-width:860px){.d-layout{grid-template-columns:1fr;}.info-grid,.gallery-strip{grid-template-columns:1fr 1fr;}}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Bajoverse</span></div>
+    <div class="nav-links">
+      <a href="01-beranda.html" class="">Beranda</a>
+      <a href="02-peta-interaktif.html" class="">Jelajahi</a>
+      <a href="03-detail-destinasi.html" class="active">Destinasi</a>
+      <a href="04-trip-planner.html" class="">Rencanakan</a>
+      <a href="05-direktori-operator.html" class="">Operator</a>
+      <a href="08-paket-sailing.html" class="">Sailing</a>
+      <a href="07-toko-merch.html" class="">Toko</a>
+      <a href="06-panduan-budaya-keselamatan.html" class="">Panduan</a>
+    </div>
+    <div class="nav-cta">
+      <div class="lang-switch">ID · EN</div>
+      <a class="btn" href="04-trip-planner.html">Mulai Rencana</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">Beranda / <a href="02-peta-interaktif.html">Jelajahi</a> / <span>Pink Beach</span></div>
+
+<div class="dhero">
+  <!-- Hapus SVG lama, ganti dengan tag img ini -->
+  <img src="pinku.jpeg" alt="Pemandangan indah Pink Beach, Labuan Bajo" style="object-fit: cover; width: 100%; height: 100%;">
+
+  <!-- Bagian info biarkan tetap di bawahnya -->
+  <div class="dhero-info">
+    <span class="coord">8°35'55"S 119°41'46"E</span>
+    <h1>Pink Beach</h1>
+    <div class="rating-row">★★★★★ 4.9 · 1.204 ulasan · Snorkeling · 15 mnt dari dermaga</div>
+  </div>
+</div>
+
+<div class="d-layout">
+  <div>
+    <div class="tabs">
+      <div class="tab active">Ringkasan</div>
+      <div class="tab">Etika Kunjungan</div>
+      <div class="tab">Ulasan (1.204)</div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-box"><b>06:00–17:00</b><span>Jam terbaik berkunjung</span></div>
+      <div class="info-box"><b>1–2 jam</b><span>Durasi rata-rata</span></div>
+      <div class="info-box"><b>Tenang</b><span>Kondisi laut hari ini</span></div>
+    </div>
+
+    <h3 style="font-size:20px;margin-bottom:10px;">Tentang Pink Beach</h3>
+    <p style="color:var(--ink-soft);line-height:1.7;font-size:14.5px;">
+      Salah satu dari sedikit pantai berpasir merah muda di dunia, warnanya berasal dari organisme mikroskopis Foraminifera yang bercampur dengan pasir putih. Cocok untuk snorkeling dangkal dengan terumbu karang yang masih terjaga di area Taman Nasional Komodo.
+    </p>
+
+<!-- BAGIAN GALERI -->
+  <div class="gallery-strip" style="display: flex; gap: 12px; width: 100%; margin-bottom: 48px;">
+    <!-- Ganti src dengan gambar galeri lo -->
+    <img src="pink1.jpeg" alt="Galeri 1" style="flex: 1; width: 25%; aspect-ratio: 10/9; object-fit: cover; border-radius: 12px;">
+    <img src="pink2.jpeg" alt="Galeri 2" style="flex: 1; width: 25%; aspect-ratio: 10/9; object-fit: cover; border-radius: 12px;">
+    <img src="pink3.jpeg" alt="Galeri 3" style="flex: 1; width: 25%; aspect-ratio: 10/9; object-fit: cover; border-radius: 12px;">
+    <img src="pink4.jpg" alt="Galeri 4" style="flex: 1; width: 25%; aspect-ratio: 10/9; object-fit: cover; border-radius: 12px;">
+  </div>
+
+  <!-- BAGIAN DESTINASI TERKAIT -->
+  <h3 style="font-size:20px;margin:24px 0 10px;">Destinasi terkait</h3>
+  <div class="related-row" style="display: flex; gap: 16px; width: 100%;">
+    
+    <div class="related-card" style="flex: 1;">
+      <!-- Ganti src dengan gambar destinasi terkait -->
+      <img src="padar.jpg" alt="Padar Island" style="width: 100%; aspect-ratio: 10/7; object-fit: cover; border-radius: 16px; border: 1px solid var(--line);">
+      <p style="margin-top: 10px; font-weight: 600; font-size: 15px;">Padar Island</p>
+    </div>
+    
+    <div class="related-card" style="flex: 1;">
+      <img src="komodo.jpg" alt="Pulau Komodo" style="width: 100%; aspect-ratio: 10/7; object-fit: cover; border-radius: 16px; border: 1px solid var(--line);">
+      <p style="margin-top: 10px; font-weight: 600; font-size: 15px;">Pulau Komodo</p>
+    </div>
+    
+    <div class="related-card" style="flex: 1;">
+      <img src="kelor.jpeg" alt="Pulau Kelor" style="width: 100%; aspect-ratio: 10/7; object-fit: cover; border-radius: 16px; border: 1px solid var(--line);">
+      <p style="margin-top: 10px; font-weight: 600; font-size: 15px;">Pulau Kelor</p>
+    </div>
+    
+  </div>
+
+</div> 
+<!-- NAH INI DIA PENYELAMATNYA! <div> penutup ini yang bikin footer lu ga kesedot ke atas. Pastiin ini ada tepat di atas tag <footer> -->
+
+  <div class="sidebar-card">
+    <h4>Ringkasan cepat</h4>
+    <div class="side-row"><span>Aktivitas</span><span>Snorkeling</span></div>
+    <div class="side-row"><span>Jarak dermaga</span><span>15 menit</span></div>
+    <div class="side-row"><span>Status izin</span><span>Tersedia</span></div>
+    <div class="side-row"><span>Kondisi laut</span><span>Tenang</span></div>
+    <a class="btn coral" style="width:100%;justify-content:center;margin-top:18px;" href="04-trip-planner.html">+ Tambahkan ke Itinerary</a>
+    <a class="btn outline" style="width:100%;justify-content:center;margin-top:10px;" href="06-panduan-budaya-keselamatan.html">Lihat Etika Kunjungan</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo" style="color:#fff;">Bajoverse</span></div>
+      <p style="font-size:13px;line-height:1.6;margin-top:14px;max-width:260px;color:rgba(255,255,255,0.6);">Platform digital resmi pendukung Labuan Bajo sebagai Destinasi Pariwisata Super Prioritas.</p>
+    </div>
+    <div><h5>Jelajahi</h5><ul><li>Peta interaktif</li><li>Pink Beach</li><li>Golo Mori</li><li>Taman Nasional Komodo</li><li>Wae Rebo</li></ul></div>
+    <div><h5>Layanan</h5><ul><li>Susun itinerary</li><li>Paket sailing</li><li>Toko merch</li><li>Operator terverifikasi</li></ul></div>
+    <div><h5>Tentang</h5><ul><li>Konservasi &amp; keberlanjutan</li><li>Panduan budaya lokal</li><li>Bahasa Indonesia / English</li><li>Kontak darurat</li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Bajoverse —Labuan Bajo</span>
+    <span> </span>
+  </div>
+</footer>
+</body>
+</html>

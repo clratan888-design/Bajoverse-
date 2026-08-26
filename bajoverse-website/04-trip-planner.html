@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Planner — Bajoverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242C; --ink-soft:#3C5560;
+  --pink:#F2A6A0; --pink-deep:#E3857D; --pink-soft:#FBE4DE;
+  --teal:#1F6F72; --teal-deep:#0F4749;
+  --sand:#F6ECDD; --coral:#E76F51; --white:#FFFDF9;
+  --line: rgba(22,36,44,0.12);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+.coord{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal-deep);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;display:flex;align-items:center;gap:8px;}
+.logo span{color:var(--coral);font-style:italic;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a:hover{color:var(--coral);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.lang-switch{font-size:13px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:6px 14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--white);padding:11px 22px;border-radius:30px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,111,114,0.3);}
+.btn.outline{background:transparent;color:var(--ink);border:1.4px solid var(--ink);}
+.btn.outline:hover{background:var(--ink);color:var(--white);box-shadow:none;}
+.btn.coral{background:var(--coral);}
+.btn.coral:hover{box-shadow:0 10px 22px rgba(231,111,81,0.35);}
+.btn.small{padding:8px 16px;font-size:12.5px;}
+
+.breadcrumb{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;padding:20px 32px 0;max-width:1180px;margin:0 auto;}
+.breadcrumb span{color:var(--ink);font-weight:600;}
+
+.section{padding:64px 32px;}
+.section.tint{background:var(--sand);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+.sec-head h1,.sec-head h2{font-size:34px;max-width:600px;}
+.sec-head p{color:var(--ink-soft);font-size:15px;max-width:360px;line-height:1.6;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:30px;background:var(--pink-soft);color:var(--pink-deep);font-weight:700;font-size:12.5px;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 32px 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;}
+.foot-grid h5{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;}
+
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--pink-soft);color:var(--pink-deep);}
+.tag.teal{background:#E4F1F0;color:var(--teal-deep);}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+
+
+.planner-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;max-width:1180px;margin:0 auto;padding:32px;align-items:start;}
+.day-tabs{display:flex;gap:10px;margin-bottom:24px;}
+.day-tab{padding:9px 20px;border-radius:20px;font-size:13.5px;font-weight:700;background:var(--sand);color:var(--ink-soft);cursor:pointer;}
+.day-tab.active{background:var(--ink);color:#fff;}
+.timeline{border-left:2px solid var(--line);padding-left:26px;display:flex;flex-direction:column;gap:26px;}
+.tl-item{position:relative;}
+.tl-item::before{content:"";position:absolute;left:-32px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--coral);border:3px solid var(--white);box-shadow:0 0 0 2px var(--coral);}
+.tl-time{font-family:'Space Mono',monospace;font-size:12px;color:var(--pink-deep);font-weight:700;}
+.tl-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;}
+.tl-card h5{font-size:15px;margin:0 0 4px;}
+.tl-card span{font-size:12px;color:var(--ink-soft);}
+.add-activity{border:1.5px dashed var(--line);border-radius:16px;padding:16px;text-align:center;color:var(--ink-soft);font-weight:700;font-size:13.5px;cursor:pointer;margin-top:6px;}
+.summary-card{background:var(--ink);color:#fff;border-radius:20px;padding:24px;}
+.summary-card h4{font-size:15px;margin-bottom:16px;}
+.sum-row{display:flex;justify-content:space-between;font-size:13.5px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.14);}
+.sum-row:last-of-type{border:none;}
+.sum-row .ok{color:#8BD9C4;font-weight:700;}
+.sum-row .warn{color:#F2C46E;font-weight:700;}
+@media(max-width:860px){.planner-layout{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Bajoverse</span></div>
+    <div class="nav-links">
+      <a href="01-beranda.html" class="">Beranda</a>
+      <a href="02-peta-interaktif.html" class="">Jelajahi</a>
+      <a href="03-detail-destinasi.html" class="">Destinasi</a>
+      <a href="04-trip-planner.html" class="active">Rencanakan</a>
+      <a href="05-direktori-operator.html" class="">Operator</a>
+      <a href="08-paket-sailing.html" class="">Sailing</a>
+      <a href="07-toko-merch.html" class="">Toko</a>
+      <a href="06-panduan-budaya-keselamatan.html" class="">Panduan</a>
+    </div>
+    <div class="nav-cta">
+      <div class="lang-switch">ID · EN</div>
+      <a class="btn" href="04-trip-planner.html">Mulai Rencana</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">Beranda / <span>Trip Planner</span></div>
+<section class="section" style="padding-top:24px;padding-bottom:0;">
+  <div class="wrap">
+    <div class="eyebrow">Fitur 04</div>
+    <div class="sec-head">
+      <h1>Rencana Perjalanan Saya</h1>
+      <p>Susun itinerary harian, terhubung otomatis ke status izin dan cuaca.</p>
+    </div>
+  </div>
+</section>
+
+<div class="planner-layout">
+  <div>
+    <div class="day-tabs">
+      <div class="day-tab active">Hari 1</div>
+      <div class="day-tab">Hari 2</div>
+      <div class="day-tab">Hari 3</div>
+      <div class="day-tab">+ Tambah hari</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-time">06:00</span>
+        <div class="tl-card"><div><h5>Berangkat ke Pulau Padar</h5><span>Kapal · 1j 40m</span></div><a class="btn small outline" href="05-direktori-operator.html">Ganti kapal</a></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">08:30</span>
+        <div class="tl-card"><div><h5>Trekking sunrise viewpoint</h5><span>Ringan · 30 menit</span></div></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">11:00</span>
+        <div class="tl-card"><div><h5>Snorkeling Pink Beach</h5><span>Laut tenang · perlengkapan disediakan</span></div><a class="btn small outline" href="03-detail-destinasi.html">Lihat detail</a></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">14:00</span>
+        <div class="tl-card"><div><h5>Ranger tour Pulau Komodo</h5><span>Izin terkonfirmasi</span></div></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">17:30</span>
+        <div class="tl-card"><div><h5>Kembali ke Labuan Bajo</h5><span>Kapal · 2j 10m</span></div></div>
+      </div>
+    </div>
+    <div class="add-activity">+ Tambah aktivitas ke Hari 1</div>
+  </div>
+
+  <div class="summary-card">
+    <h4>Ringkasan Hari 1</h4>
+    <div class="sum-row"><span>Total durasi</span><span>11j 30m</span></div>
+    <div class="sum-row"><span>Status izin TNK</span><span class="ok">✓ Terkonfirmasi</span></div>
+    <div class="sum-row"><span>Kondisi laut</span><span class="ok">Tenang</span></div>
+    <div class="sum-row"><span>Slot kapal tersisa</span><span class="warn">3 kursi</span></div>
+    <div class="sum-row"><span>Operator</span><span>Komodo Explorer</span></div>
+    <a class="btn coral" style="width:100%;justify-content:center;margin-top:18px;" href="05-direktori-operator.html">Konfirmasi &amp; Pesan</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo" style="color:#fff;">Bajoverse</span></div>
+      <p style="font-size:13px;line-height:1.6;margin-top:14px;max-width:260px;color:rgba(255,255,255,0.6);">Platform digital resmi pendukung Labuan Bajo sebagai Destinasi Pariwisata Super Prioritas.</p>
+    </div>
+    <div><h5>Jelajahi</h5><ul><li>Peta interaktif</li><li>Pink Beach</li><li>Golo Mori</li><li>Taman Nasional Komodo</li><li>Wae Rebo</li></ul></div>
+    <div><h5>Layanan</h5><ul><li>Susun itinerary</li><li>Paket sailing</li><li>Toko merch</li><li>Operator terverifikasi</li></ul></div>
+    <div><h5>Tentang</h5><ul><li>Konservasi &amp; keberlanjutan</li><li>Panduan budaya lokal</li><li>Bahasa Indonesia / English</li><li>Kontak darurat</li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Bajoverse —Labuan Bajo</span>
+    <span> </span>
+  </div>
+</footer>
+</body>
+</html>

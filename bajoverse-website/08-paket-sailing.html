@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paket Sailing — Bajoverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242C; --ink-soft:#3C5560;
+  --pink:#F2A6A0; --pink-deep:#E3857D; --pink-soft:#FBE4DE;
+  --teal:#1F6F72; --teal-deep:#0F4749;
+  --sand:#F6ECDD; --coral:#E76F51; --white:#FFFDF9;
+  --line: rgba(22,36,44,0.12);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+.coord{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal-deep);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;display:flex;align-items:center;gap:8px;}
+.logo span{color:var(--coral);font-style:italic;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a:hover{color:var(--coral);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.lang-switch{font-size:13px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:6px 14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--white);padding:11px 22px;border-radius:30px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,111,114,0.3);}
+.btn.outline{background:transparent;color:var(--ink);border:1.4px solid var(--ink);}
+.btn.outline:hover{background:var(--ink);color:var(--white);box-shadow:none;}
+.btn.coral{background:var(--coral);}
+.btn.coral:hover{box-shadow:0 10px 22px rgba(231,111,81,0.35);}
+.btn.small{padding:8px 16px;font-size:12.5px;}
+
+.breadcrumb{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;padding:20px 32px 0;max-width:1180px;margin:0 auto;}
+.breadcrumb span{color:var(--ink);font-weight:600;}
+
+.section{padding:64px 32px;}
+.section.tint{background:var(--sand);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+.sec-head h1,.sec-head h2{font-size:34px;max-width:600px;}
+.sec-head p{color:var(--ink-soft);font-size:15px;max-width:360px;line-height:1.6;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:30px;background:var(--pink-soft);color:var(--pink-deep);font-weight:700;font-size:12.5px;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 32px 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;}
+.foot-grid h5{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;}
+
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--pink-soft);color:var(--pink-deep);}
+.tag.teal{background:#E4F1F0;color:var(--teal-deep);}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+
+
+.sail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:8px;}
+.sail-card{background:var(--white);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;}
+.sail-media{height:130px;position:relative;}
+.sail-media svg{width:100%;height:100%;}
+.sail-days{position:absolute;top:10px;left:10px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;}
+.sail-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.sail-body h4{font-size:16px;margin:0;}
+.sail-body .price{font-family:'Fraunces',serif;font-size:18px;color:var(--teal-deep);}
+.island-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.island-chip{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:20px;background:var(--sand);color:var(--ink-soft);}
+.island-chip.gm{background:var(--pink-soft);color:var(--pink-deep);}
+.book-btn{margin-top:auto;background:var(--coral);color:#fff;border:none;border-radius:20px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;}
+.book-btn:hover{opacity:0.9;}
+.booking-panel{background:var(--ink);color:#fff;border-radius:24px;padding:32px;margin-top:36px;max-width:1180px;margin-left:auto;margin-right:auto;scroll-margin-top:100px;}
+.booking-panel h3{color:#fff;font-size:22px;margin-bottom:6px;}
+.booking-panel p.sub{color:rgba(255,255,255,0.6);font-size:13.5px;margin-bottom:22px;}
+#selected-package{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:700;color:var(--pink);margin-bottom:22px;}
+.booking-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.booking-form-grid input, .booking-form-grid select{padding:12px 14px;border-radius:10px;border:none;font-family:'Plus Jakarta Sans';font-size:13.5px;}
+#booking-success{display:none;background:#1B5B5E;border-radius:16px;padding:20px;margin-top:18px;}
+#booking-success b{font-family:'Fraunces',serif;font-size:18px;color:var(--pink);display:block;margin-bottom:6px;}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Bajoverse</span></div>
+    <div class="nav-links">
+      <a href="01-beranda.html" class="">Beranda</a>
+      <a href="02-peta-interaktif.html" class="">Jelajahi</a>
+      <a href="03-detail-destinasi.html" class="">Destinasi</a>
+      <a href="04-trip-planner.html" class="">Rencanakan</a>
+      <a href="05-direktori-operator.html" class="">Operator</a>
+      <a href="08-paket-sailing.html" class="active">Sailing</a>
+      <a href="07-toko-merch.html" class="">Toko</a>
+      <a href="06-panduan-budaya-keselamatan.html" class="">Panduan</a>
+    </div>
+    <div class="nav-cta">
+      <div class="lang-switch">ID · EN</div>
+      <a class="btn" href="04-trip-planner.html">Mulai Rencana</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">Beranda / <span>Paket Sailing</span></div>
+<section class="section" style="padding-top:24px;padding-bottom:20px;">
+  <div class="wrap">
+    <div class="eyebrow">Fitur 08 · Booking</div>
+    <div class="sec-head">
+      <h1>Paket Sailing &amp; Island Hopping</h1>
+      <p>Pilih rute, lihat pulau mana saja yang disinggahi, lalu booking langsung.</p>
+    </div>
+<div class="sail-grid">
+      
+      <div class="sail-card">
+        <div class="sail-media">
+          <img src="pinkexpres.jpg" alt="Pink Beach Express" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <span class="sail-days">1D · Day Trip</span>
+        </div>
+        <div class="sail-body">
+          <h4>Pink Beach Express</h4>
+          <div class="island-chips">
+            <span class="island-chip">Pulau Kelor</span><span class="island-chip">Pink Beach</span><span class="island-chip">Manjarite</span>
+          </div>
+          <span class="price">Rp 750rb <span style="font-size:11px;color:var(--ink-soft);">/orang</span></span>
+          <button class="book-btn" onclick="selectPackage('Pink Beach Express (1D)','Rp 750rb/orang')">Pilih &amp; Booking</button>
+        </div>
+      </div>
+
+      <div class="sail-card">
+        <div class="sail-media">
+          <img src="kom.jpeg" alt="Komodo Classic Route" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <span class="sail-days">2D1N</span>
+        </div>
+        <div class="sail-body">
+          <h4>Komodo Classic Route</h4>
+          <div class="island-chips">
+            <span class="island-chip">Pulau Padar</span><span class="island-chip">Pulau Komodo</span><span class="island-chip">Pink Beach</span><span class="island-chip">Pulau Rinca</span>
+          </div>
+          <span class="price">Rp 2.1jt <span style="font-size:11px;color:var(--ink-soft);">/orang</span></span>
+          <button class="book-btn" onclick="selectPackage('Komodo Classic Route (2D1N)','Rp 2.1jt/orang')">Pilih &amp; Booking</button>
+        </div>
+      </div>
+
+      <div class="sail-card">
+        <div class="sail-media">
+          <img src="golomori.webp" alt="Golo Mori Escape" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <span class="sail-days">1D · Day Trip</span>
+        </div>
+        <div class="sail-body">
+          <h4>Golo Mori Escape</h4>
+          <div class="island-chips">
+            <span class="island-chip gm">Golo Mori</span><span class="island-chip">Pulau Rinca</span><span class="island-chip">Tebing Golo Mori</span>
+          </div>
+          <span class="price">Rp 980rb <span style="font-size:11px;color:var(--ink-soft);">/orang</span></span>
+          <button class="book-btn" onclick="selectPackage('Golo Mori Escape (1D)','Rp 980rb/orang')">Pilih &amp; Booking</button>
+        </div>
+      </div>
+
+      <div class="sail-card">
+        <div class="sail-media">
+          <img src="8.jpg" alt="Grand Archipelago" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <span class="sail-days">3D2N Liveaboard</span>
+        </div>
+        <div class="sail-body">
+          <h4>Grand Archipelago</h4>
+          <div class="island-chips">
+            <span class="island-chip">Pulau Padar</span><span class="island-chip">Pulau Komodo</span><span class="island-chip">Pink Beach</span>
+            <span class="island-chip gm">Golo Mori</span><span class="island-chip">Pulau Kalong</span><span class="island-chip">Manta Point</span>
+          </div>
+          <span class="price">Rp 4.8jt <span style="font-size:11px;color:var(--ink-soft);">/orang</span></span>
+          <button class="book-btn" onclick="selectPackage('Grand Archipelago (3D2N)','Rp 4.8jt/orang')">Pilih &amp; Booking</button>
+        </div>
+      </div>
+
+      <div class="sail-card">
+        <div class="sail-media">
+          <img src="sun.jpeg" alt="Sunset Sailing Kalong" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <span class="sail-days">1D · Sunset</span>
+        </div>
+        <div class="sail-body">
+          <h4>Sunset Sailing Kalong</h4>
+          <div class="island-chips">
+            <span class="island-chip">Pulau Kalong</span><span class="island-chip">Golo Mori</span>
+          </div>
+          <span class="price">Rp 550rb <span style="font-size:11px;color:var(--ink-soft);">/orang</span></span>
+          <button class="book-btn" onclick="selectPackage('Sunset Sailing Kalong (1D)','Rp 550rb/orang')">Pilih &amp; Booking</button>
+        </div>
+      </div>
+
+      <div class="sail-card">
+        <div class="sail-media">
+          <img src="dive.jpeg" alt="Manta & Reef Dive Route" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <span class="sail-days">2D1N Diving</span>
+        </div>
+        <div class="sail-body">
+          <h4>Manta &amp; Reef Dive Route</h4>
+          <div class="island-chips">
+            <span class="island-chip">Manta Point</span><span class="island-chip">Pulau Rinca</span><span class="island-chip gm">Golo Mori</span>
+          </div>
+          <span class="price">Rp 2.6jt <span style="font-size:11px;color:var(--ink-soft);">/orang</span></span>
+          <button class="book-btn" onclick="selectPackage('Manta &amp; Reef Dive Route (2D1N)','Rp 2.6jt/orang')">Pilih &amp; Booking</button>
+        </div>
+      </div>
+      
+    </div>
+
+  <div class="booking-panel wrap" id="booking-panel">
+    <h3>Form Booking</h3>
+    <p class="sub">Isi data di bawah untuk mengonfirmasi jadwal sailing kamu.</p>
+    <div id="selected-package">Belum ada paket dipilih</div>
+
+    <form id="booking-form" onsubmit="submitBooking(event)">
+      <div class="booking-form-grid">
+        <input type="text" id="b-name" placeholder="Nama lengkap" required>
+        <input type="email" id="b-email" placeholder="Email" required>
+        <input type="date" id="b-date" required>
+        <input type="number" id="b-pax" min="1" value="2" placeholder="Jumlah peserta" required>
+      </div>
+      <button type="submit" class="btn coral" style="margin-top:16px;">Submit Booking</button>
+    </form>
+
+    <div id="booking-success">
+      <b>Booking berhasil dikonfirmasi!</b>
+      <span id="booking-summary"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+function selectPackage(name, price){
+  document.getElementById("selected-package").textContent = name + " — " + price;
+  document.getElementById("selected-package").dataset.name = name;
+  document.getElementById("booking-success").style.display = "none";
+  document.getElementById("booking-form").style.display = "block";
+  document.getElementById("booking-panel").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function submitBooking(e){
+  e.preventDefault();
+  const pkg = document.getElementById("selected-package").dataset.name || "Paket Sailing";
+  const name = document.getElementById("b-name").value;
+  const date = document.getElementById("b-date").value;
+  const pax = document.getElementById("b-pax").value;
+  const code = "SAIL-" + Math.floor(100000 + Math.random()*900000);
+  document.getElementById("booking-form").style.display = "none";
+  const success = document.getElementById("booking-success");
+  success.style.display = "block";
+  document.getElementById("booking-summary").innerHTML =
+    `Kode booking <b style="color:var(--pink);display:inline;">${code}</b><br>${pkg} · ${pax} peserta · atas nama ${name} · keberangkatan ${date}<br>Detail pembayaran dikirim ke email kamu.`;
+}
+</script>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo" style="color:#fff;">Bajoverse</span></div>
+      <p style="font-size:13px;line-height:1.6;margin-top:14px;max-width:260px;color:rgba(255,255,255,0.6);">Platform digital resmi pendukung Labuan Bajo sebagai Destinasi Pariwisata Super Prioritas.</p>
+    </div>
+    <div><h5>Jelajahi</h5><ul><li>Peta interaktif</li><li>Pink Beach</li><li>Golo Mori</li><li>Taman Nasional Komodo</li><li>Wae Rebo</li></ul></div>
+    <div><h5>Layanan</h5><ul><li>Susun itinerary</li><li>Paket sailing</li><li>Toko merch</li><li>Operator terverifikasi</li></ul></div>
+    <div><h5>Tentang</h5><ul><li>Konservasi &amp; keberlanjutan</li><li>Panduan budaya lokal</li><li>Bahasa Indonesia / English</li><li>Kontak darurat</li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Bajoverse —Labuan Bajo</span>
+    <span> </span>
+  </div>
+</footer>
+</body>
+</html>

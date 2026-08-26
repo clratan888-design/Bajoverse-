@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toko Merch — Bajoverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242C; --ink-soft:#3C5560;
+  --pink:#F2A6A0; --pink-deep:#E3857D; --pink-soft:#FBE4DE;
+  --teal:#1F6F72; --teal-deep:#0F4749;
+  --sand:#F6ECDD; --coral:#E76F51; --white:#FFFDF9;
+  --line: rgba(22,36,44,0.12);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+.coord{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal-deep);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;display:flex;align-items:center;gap:8px;}
+.logo span{color:var(--coral);font-style:italic;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a:hover{color:var(--coral);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.lang-switch{font-size:13px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:6px 14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--white);padding:11px 22px;border-radius:30px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,111,114,0.3);}
+.btn.outline{background:transparent;color:var(--ink);border:1.4px solid var(--ink);}
+.btn.outline:hover{background:var(--ink);color:var(--white);box-shadow:none;}
+.btn.coral{background:var(--coral);}
+.btn.coral:hover{box-shadow:0 10px 22px rgba(231,111,81,0.35);}
+.btn.small{padding:8px 16px;font-size:12.5px;}
+
+.breadcrumb{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;padding:20px 32px 0;max-width:1180px;margin:0 auto;}
+.breadcrumb span{color:var(--ink);font-weight:600;}
+
+.section{padding:64px 32px;}
+.section.tint{background:var(--sand);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+.sec-head h1,.sec-head h2{font-size:34px;max-width:600px;}
+.sec-head p{color:var(--ink-soft);font-size:15px;max-width:360px;line-height:1.6;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:30px;background:var(--pink-soft);color:var(--pink-deep);font-weight:700;font-size:12.5px;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 32px 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;}
+.foot-grid h5{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;}
+
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--pink-soft);color:var(--pink-deep);}
+.tag.teal{background:#E4F1F0;color:var(--teal-deep);}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+
+
+.shop-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;max-width:1180px;margin:0 auto;padding:32px;align-items:start;}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.prod-card{background:var(--white);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;}
+.prod-media{height:140px;}
+.prod-media svg{width:100%;height:100%;}
+.prod-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.prod-body h4{font-size:14.5px;margin:0;}
+.prod-body .price{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--teal-deep);}
+.prod-body p{font-size:12px;color:var(--ink-soft);margin:0;line-height:1.5;}
+.add-cart-btn{margin-top:auto;background:var(--ink);color:#fff;border:none;border-radius:20px;padding:9px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .15s;}
+.add-cart-btn:hover{background:var(--coral);}
+.add-cart-btn.added{background:var(--teal);}
+.cart-card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:22px;position:sticky;top:90px;}
+.cart-card h4{font-size:16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;}
+.cart-card h4 span{font-size:11.5px;font-weight:700;background:var(--pink-soft);color:var(--pink-deep);padding:3px 9px;border-radius:20px;}
+#cart-items{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;max-height:260px;overflow-y:auto;}
+.cart-empty{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px 0;}
+.cart-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:8px;}
+.cart-row .qty-ctrl{display:flex;align-items:center;gap:6px;}
+.cart-row .qty-ctrl button{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:11px;line-height:1;}
+.cart-total-row{display:flex;justify-content:space-between;font-size:14.5px;font-weight:700;padding-top:14px;border-top:1px solid var(--line);margin-bottom:16px;}
+#checkout-form{display:none;flex-direction:column;gap:10px;margin-top:6px;}
+#checkout-form input{padding:10px 12px;border-radius:10px;border:1px solid var(--line);font-family:'Plus Jakarta Sans';font-size:13px;}
+#order-success{display:none;background:#E4F1F0;border-radius:14px;padding:16px;font-size:13px;color:var(--teal-deep);}
+#order-success b{display:block;font-family:'Fraunces',serif;font-size:16px;margin-bottom:4px;}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Bajoverse</span></div>
+    <div class="nav-links">
+      <a href="01-beranda.html" class="">Beranda</a>
+      <a href="02-peta-interaktif.html" class="">Jelajahi</a>
+      <a href="03-detail-destinasi.html" class="">Destinasi</a>
+      <a href="04-trip-planner.html" class="">Rencanakan</a>
+      <a href="05-direktori-operator.html" class="">Operator</a>
+      <a href="08-paket-sailing.html" class="">Sailing</a>
+      <a href="07-toko-merch.html" class="active">Toko</a>
+      <a href="06-panduan-budaya-keselamatan.html" class="">Panduan</a>
+    </div>
+    <div class="nav-cta">
+      <div class="lang-switch">ID · EN</div>
+      <a class="btn" href="04-trip-planner.html">Mulai Rencana</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">Beranda / <span>Toko Merch</span></div>
+<section class="section" style="padding-top:24px;padding-bottom:0;">
+  <div class="wrap">
+    <div class="eyebrow">Fitur 07 · E-commerce</div>
+    <div class="sec-head">
+      <h1>Toko Merch Bajoverse</h1>
+      <p>Bawa pulang Labuan Bajo — merchandise resmi, sebagian hasil penjualan mendukung konservasi Taman Nasional Komodo.</p>
+    </div>
+  </div>
+</section>
+
+<div class="shop-layout">
+  <div class="shop-grid">
+
+    <div class="prod-card">
+      <div class="prod-media">
+        <!-- Ganti src dengan foto kaos asli lo -->
+        <img src="kaos.jpeg" alt="Kaos Bajoverse Pink Beach" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="prod-body">
+        <h4>Kaos Bajoverse "Pink Beach"</h4>
+        <p>Katun combed 24s, sablon peta arsipelago.</p>
+        <span class="price">Rp 149.000</span>
+        <button class="add-cart-btn" data-name="Kaos Bajoverse Pink Beach" data-price="149000" onclick="addToCart(this)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-media">
+        <!-- Ganti src dengan foto tote bag asli lo -->
+        <img src="tote.jpeg" alt="Tote Bag Komodo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="prod-body">
+        <h4>Tote Bag Komodo</h4>
+        <p>Kanvas tebal, motif ilustrasi komodo minimalis.</p>
+        <span class="price">Rp 89.000</span>
+        <button class="add-cart-btn" data-name="Tote Bag Komodo" data-price="89000" onclick="addToCart(this)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-media">
+        <!-- Ganti src dengan foto topi asli lo -->
+        <img src="topi.jpeg" alt="Topi Bucket Golo Mori" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="prod-body">
+        <h4>Topi Bucket Golo Mori</h4>
+        <p>Bahan cepat kering, cocok buat sailing trip.</p>
+        <span class="price">Rp 95.000</span>
+        <button class="add-cart-btn" data-name="Topi Bucket Golo Mori" data-price="95000" onclick="addToCart(this)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-media">
+        <!-- Ganti src dengan foto botol asli lo -->
+        <img src="botol.jpg" alt="Botol Minum Stainless" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="prod-body">
+        <h4>Botol Minum Stainless</h4>
+        <p>500ml, cocok dipakai trekking Padar &amp; Rinca.</p>
+        <span class="price">Rp 120.000</span>
+        <button class="add-cart-btn" data-name="Botol Minum Stainless" data-price="120000" onclick="addToCart(this)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-media">
+        <!-- Ganti src dengan foto gantungan kunci asli lo -->
+        <img src="gantungan.jpeg" alt="Gantungan Kunci Komodo Kayu" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="prod-body">
+        <h4>Gantungan Kunci Komodo Kayu</h4>
+        <p>Kerajinan tangan pengrajin lokal Labuan Bajo.</p>
+        <span class="price">Rp 35.000</span>
+        <button class="add-cart-btn" data-name="Gantungan Kunci Komodo" data-price="35000" onclick="addToCart(this)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-media">
+        <!-- Ganti src dengan foto poster asli lo -->
+        <img src="posterr.jpg" alt="Poster Ilustrasi Pink Beach" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="prod-body">
+        <h4>Poster Ilustrasi Pink Beach</h4>
+        <p>Cetak fine art A3, siap pajang.</p>
+        <span class="price">Rp 79.000</span>
+        <button class="add-cart-btn" data-name="Poster Pink Beach" data-price="79000" onclick="addToCart(this)">+ Keranjang</button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="cart-card">
+    <h4>Keranjang <span id="cart-count">0 item</span></h4>
+    <div id="cart-items"><div class="cart-empty">Keranjang masih kosong. Pilih merch di sebelah kiri.</div></div>
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">Rp 0</span></div>
+    <button class="btn coral" style="width:100%;justify-content:center;" id="checkout-btn" onclick="toggleCheckout()">Checkout</button>
+
+    <form id="checkout-form" onsubmit="submitOrder(event)">
+      <input type="text" id="buyer-name" placeholder="Nama penerima" required>
+      <input type="email" id="buyer-email" placeholder="Email" required>
+      <input type="text" id="buyer-address" placeholder="Alamat pengiriman" required>
+      <button type="submit" class="btn" style="width:100%;justify-content:center;">Submit Pesanan</button>
+    </form>
+
+    <div id="order-success">
+      <b>Pesanan terkirim!</b>
+      <span id="order-summary"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+let cart = [];
+
+function addToCart(btn){
+  const name = btn.dataset.name;
+  const price = parseInt(btn.dataset.price);
+  const existing = cart.find(i => i.name === name);
+  if(existing){ existing.qty += 1; } else { cart.push({name, price, qty:1}); }
+  btn.textContent = "✓ Ditambahkan";
+  btn.classList.add("added");
+  setTimeout(()=>{ btn.textContent = "+ Keranjang"; btn.classList.remove("added"); }, 1200);
+  renderCart();
+}
+
+function changeQty(name, delta){
+  const item = cart.find(i => i.name === name);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){ cart = cart.filter(i => i.name !== name); }
+  renderCart();
+}
+
+function formatRp(n){ return "Rp " + n.toLocaleString("id-ID"); }
+
+function renderCart(){
+  const wrap = document.getElementById("cart-items");
+  const countEl = document.getElementById("cart-count");
+  const totalEl = document.getElementById("cart-total");
+  if(cart.length === 0){
+    wrap.innerHTML = '<div class="cart-empty">Keranjang masih kosong. Pilih merch di sebelah kiri.</div>';
+    countEl.textContent = "0 item";
+    totalEl.textContent = "Rp 0";
+    return;
+  }
+  let total = 0;
+  let count = 0;
+  wrap.innerHTML = cart.map(item => {
+    total += item.price * item.qty;
+    count += item.qty;
+    return `<div class="cart-row">
+      <span>${item.name}</span>
+      <div class="qty-ctrl">
+        <button type="button" onclick="changeQty('${item.name}',-1)">−</button>
+        <span>${item.qty}</span>
+        <button type="button" onclick="changeQty('${item.name}',1)">+</button>
+      </div>
+    </div>`;
+  }).join("");
+  countEl.textContent = count + " item";
+  totalEl.textContent = formatRp(total);
+}
+
+function toggleCheckout(){
+  if(cart.length === 0){ alert("Keranjang masih kosong — tambahkan merch dulu."); return; }
+  const form = document.getElementById("checkout-form");
+  form.style.display = form.style.display === "flex" ? "none" : "flex";
+}
+
+function submitOrder(e){
+  e.preventDefault();
+  const total = cart.reduce((s,i)=> s + i.price*i.qty, 0);
+  const orderId = "BJV-" + Math.floor(100000 + Math.random()*900000);
+  document.getElementById("checkout-form").style.display = "none";
+  document.getElementById("checkout-btn").style.display = "none";
+  const success = document.getElementById("order-success");
+  success.style.display = "block";
+  document.getElementById("order-summary").innerHTML =
+    `Kode pesanan <b style="color:var(--coral);">${orderId}</b> · Total ${formatRp(total)}<br>Konfirmasi dikirim ke email kamu.`;
+}
+</script>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo" style="color:#fff;">Bajoverse</span></div>
+      <p style="font-size:13px;line-height:1.6;margin-top:14px;max-width:260px;color:rgba(255,255,255,0.6);">Platform digital resmi pendukung Labuan Bajo sebagai Destinasi Pariwisata Super Prioritas.</p>
+    </div>
+    <div><h5>Jelajahi</h5><ul><li>Peta interaktif</li><li>Pink Beach</li><li>Golo Mori</li><li>Taman Nasional Komodo</li><li>Wae Rebo</li></ul></div>
+    <div><h5>Layanan</h5><ul><li>Susun itinerary</li><li>Paket sailing</li><li>Toko merch</li><li>Operator terverifikasi</li></ul></div>
+    <div><h5>Tentang</h5><ul><li>Konservasi &amp; keberlanjutan</li><li>Panduan budaya lokal</li><li>Bahasa Indonesia / English</li><li>Kontak darurat</li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Bajoverse —Labuan Bajo</span>
+    <span> </span>
+  </div>
+</footer>
+</body>
+</html>

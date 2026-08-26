@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peta Interaktif — Bajoverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242C; --ink-soft:#3C5560;
+  --pink:#F2A6A0; --pink-deep:#E3857D; --pink-soft:#FBE4DE;
+  --teal:#1F6F72; --teal-deep:#0F4749;
+  --sand:#F6ECDD; --coral:#E76F51; --white:#FFFDF9;
+  --line: rgba(22,36,44,0.12);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+.coord{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal-deep);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;display:flex;align-items:center;gap:8px;}
+.logo span{color:var(--coral);font-style:italic;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a:hover{color:var(--coral);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.lang-switch{font-size:13px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:6px 14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--white);padding:11px 22px;border-radius:30px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,111,114,0.3);}
+.btn.outline{background:transparent;color:var(--ink);border:1.4px solid var(--ink);}
+.btn.outline:hover{background:var(--ink);color:var(--white);box-shadow:none;}
+.btn.coral{background:var(--coral);}
+.btn.coral:hover{box-shadow:0 10px 22px rgba(231,111,81,0.35);}
+.btn.small{padding:8px 16px;font-size:12.5px;}
+
+.breadcrumb{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;padding:20px 32px 0;max-width:1180px;margin:0 auto;}
+.breadcrumb span{color:var(--ink);font-weight:600;}
+
+.section{padding:64px 32px;}
+.section.tint{background:var(--sand);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+.sec-head h1,.sec-head h2{font-size:34px;max-width:600px;}
+.sec-head p{color:var(--ink-soft);font-size:15px;max-width:360px;line-height:1.6;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:30px;background:var(--pink-soft);color:var(--pink-deep);font-weight:700;font-size:12.5px;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 32px 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;}
+.foot-grid h5{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;}
+
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--pink-soft);color:var(--pink-deep);}
+.tag.teal{background:#E4F1F0;color:var(--teal-deep);}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+
+
+.explore-layout{display:grid;grid-template-columns:280px 1fr;gap:28px;max-width:1180px;margin:0 auto;padding:32px;align-items:start;}
+.filter-panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:22px;position:sticky;top:90px;}
+.filter-panel h4{font-size:13px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-soft);margin:18px 0 10px;}
+.filter-panel h4:first-child{margin-top:0;}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;border:1px solid var(--line);color:var(--ink-soft);cursor:pointer;}
+.chip.on{background:var(--teal);color:#fff;border-color:var(--teal);}
+.slider-track{height:5px;background:var(--line);border-radius:10px;margin:14px 0 4px;position:relative;}
+.slider-fill{width:60%;height:5px;background:var(--coral);border-radius:10px;}
+.slider-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);}
+.map-panel{background:linear-gradient(160deg,#DCEDEC,#F6ECDD);border-radius:24px;border:1px solid var(--line);overflow:hidden;position:relative;height:560px;}
+.map-panel svg{width:100%;height:100%;}
+.pin{position:absolute;width:34px;height:34px;border-radius:50% 50% 50% 0;background:var(--coral);transform:rotate(-45deg);box-shadow:0 6px 14px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;}
+.pin span{transform:rotate(45deg);color:#fff;font-size:13px;font-weight:800;}
+.pin.p1{top:60px;left:120px;} .pin.p2{top:180px;left:260px;background:var(--teal);}
+.pin.p3{top:120px;left:400px;} .pin.p4{top:300px;left:340px;background:var(--teal);}
+.pin.p5{top:380px;left:180px;}
+.pin-tooltip{position:absolute;background:var(--ink);color:#fff;font-size:12px;padding:8px 12px;border-radius:10px;top:20px;left:100px;font-weight:600;}
+.list-panel{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.pin-card{display:flex;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:14px;align-items:center;}
+.pin-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+.pin-card h5{font-size:14px;margin:0 0 3px;}
+.pin-card span{font-size:11.5px;color:var(--ink-soft);}
+@media(max-width:860px){.explore-layout{grid-template-columns:1fr;}.list-panel{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Bajoverse</span></div>
+    <div class="nav-links">
+      <a href="01-beranda.html" class="">Beranda</a>
+      <a href="02-peta-interaktif.html" class="active">Jelajahi</a>
+      <a href="03-detail-destinasi.html" class="">Destinasi</a>
+      <a href="04-trip-planner.html" class="">Rencanakan</a>
+      <a href="05-direktori-operator.html" class="">Operator</a>
+      <a href="08-paket-sailing.html" class="">Sailing</a>
+      <a href="07-toko-merch.html" class="">Toko</a>
+      <a href="06-panduan-budaya-keselamatan.html" class="">Panduan</a>
+    </div>
+    <div class="nav-cta">
+      <div class="lang-switch">ID · EN</div>
+      <a class="btn" href="04-trip-planner.html">Mulai Rencana</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">Beranda / <span>Peta Interaktif</span></div>
+<section class="section" style="padding-top:24px;">
+  <div class="wrap">
+    <div class="eyebrow">Fitur 02</div>
+    <div class="sec-head">
+      <h1>Peta Interaktif</h1>
+      <p>Filter destinasi sesuai minat, lihat semua pulau dalam satu tampilan peta.</p>
+    </div>
+  </div>
+
+  <div class="explore-layout">
+    <aside class="filter-panel">
+      <h4>Aktivitas</h4>
+      <div class="chip-row">
+        <div class="chip on">Snorkeling</div>
+        <div class="chip">Trekking</div>
+        <div class="chip">Budaya</div>
+        <div class="chip">Diving</div>
+      </div>
+      <h4>Jarak dari dermaga</h4>
+      <div class="slider-track"><div class="slider-fill"></div></div>
+      <div class="slider-labels"><span>0 jam</span><span>≤ 3 jam</span></div>
+      <h4>Status izin hari ini</h4>
+      <div class="chip-row">
+        <div class="chip on">Tersedia</div>
+        <div class="chip">Semua</div>
+      </div>
+      <h4>Kondisi laut</h4>
+      <div class="chip-row">
+        <div class="chip on">Tenang</div>
+        <div class="chip">Semua</div>
+      </div>
+    </aside>
+
+    <div>
+      <div class="map-panel">
+        <svg viewBox="0 0 500 560" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 380 Q100 320 200 370 Q300 300 400 360 Q460 320 500 350 L500 560 L0 560 Z" fill="#BFDDD9"/>
+          <path d="M80 220 L140 150 L200 220 Z" fill="#7DA88C"/>
+          <path d="M260 260 L310 190 L360 260 Z" fill="#8FB897"/>
+          <path d="M340 340 L400 280 L440 340 Z" fill="#6E9C86"/>
+        </svg>
+        <div class="pin p1"><span>PB</span></div>
+        <div class="pin p2"><span>PD</span></div>
+        <div class="pin p3"><span>KO</span></div>
+        <div class="pin p4"><span>RI</span></div>
+        <div class="pin p5"><span>KE</span></div>
+        <div class="pin-tooltip">Pink Beach · 15 mnt dari dermaga</div>
+      </div>
+
+      <div class="list-panel">
+        <a class="pin-card" href="03-detail-destinasi.html"><div class="pin-dot" style="background:var(--coral);"></div><div><h5>Pink Beach</h5><span>Snorkeling · 15 mnt</span></div></a>
+        <a class="pin-card" href="03-detail-destinasi.html"><div class="pin-dot" style="background:var(--teal);"></div><div><h5>Padar Island</h5><span>Trekking · 1j 40m</span></div></a>
+        <a class="pin-card" href="03-detail-destinasi.html"><div class="pin-dot" style="background:var(--coral);"></div><div><h5>Pulau Komodo</h5><span>Ranger tour · 2j</span></div></a>
+        <a class="pin-card" href="03-detail-destinasi.html"><div class="pin-dot" style="background:var(--teal);"></div><div><h5>Pulau Rinca</h5><span>Trekking · 1j 20m</span></div></a>
+        <a class="pin-card" href="03-detail-destinasi.html"><div class="pin-dot" style="background:var(--coral);"></div><div><h5>Pulau Kelor</h5><span>Sunset spot · 30 mnt</span></div></a>
+        <a class="pin-card" href="03-detail-destinasi.html"><div class="pin-dot" style="background:var(--teal);"></div><div><h5>Wae Rebo</h5><span>Budaya · 4j perjalanan darat</span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo" style="color:#fff;">Bajoverse</span></div>
+      <p style="font-size:13px;line-height:1.6;margin-top:14px;max-width:260px;color:rgba(255,255,255,0.6);">Platform digital resmi pendukung Labuan Bajo sebagai Destinasi Pariwisata Super Prioritas.</p>
+    </div>
+    <div><h5>Jelajahi</h5><ul><li>Peta interaktif</li><li>Pink Beach</li><li>Golo Mori</li><li>Taman Nasional Komodo</li><li>Wae Rebo</li></ul></div>
+    <div><h5>Layanan</h5><ul><li>Susun itinerary</li><li>Paket sailing</li><li>Toko merch</li><li>Operator terverifikasi</li></ul></div>
+    <div><h5>Tentang</h5><ul><li>Konservasi &amp; keberlanjutan</li><li>Panduan budaya lokal</li><li>Bahasa Indonesia / English</li><li>Kontak darurat</li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Bajoverse —Labuan Bajo</span>
+    <span> </span>
+  </div>
+</footer>
+</body>
+</html>
