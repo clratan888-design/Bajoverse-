@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beranda — Bajoverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242C; --ink-soft:#3C5560;
+  --pink:#F2A6A0; --pink-deep:#E3857D; --pink-soft:#FBE4DE;
+  --teal:#1F6F72; --teal-deep:#0F4749;
+  --sand:#F6ECDD; --coral:#E76F51; --white:#FFFDF9;
+  --line: rgba(22,36,44,0.12);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+.coord{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal-deep);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;display:flex;align-items:center;gap:8px;}
+.logo span{color:var(--coral);font-style:italic;}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a:hover{color:var(--coral);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.lang-switch{font-size:13px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;padding:6px 14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--white);padding:11px 22px;border-radius:30px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,111,114,0.3);}
+.btn.outline{background:transparent;color:var(--ink);border:1.4px solid var(--ink);}
+.btn.outline:hover{background:var(--ink);color:var(--white);box-shadow:none;}
+.btn.coral{background:var(--coral);}
+.btn.coral:hover{box-shadow:0 10px 22px rgba(231,111,81,0.35);}
+.btn.small{padding:8px 16px;font-size:12.5px;}
+
+.breadcrumb{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;padding:20px 32px 0;max-width:1180px;margin:0 auto;}
+.breadcrumb span{color:var(--ink);font-weight:600;}
+
+.section{padding:64px 32px;}
+.section.tint{background:var(--sand);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap;}
+.sec-head h1,.sec-head h2{font-size:34px;max-width:600px;}
+.sec-head p{color:var(--ink-soft);font-size:15px;max-width:360px;line-height:1.6;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:30px;background:var(--pink-soft);color:var(--pink-deep);font-weight:700;font-size:12.5px;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 32px 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;}
+.foot-grid h5{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:10px;}
+
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--pink-soft);color:var(--pink-deep);}
+.tag.teal{background:#E4F1F0;color:var(--teal-deep);}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+
+
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#FDF3EE 0%,var(--white) 60%);}
+.hero-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:40px;align-items:center;padding:64px 32px 40px;max-width:1180px;margin:0 auto;}
+.hero h1{font-size:54px;line-height:1.04;color:var(--ink);}
+.hero h1 em{font-style:italic;color:var(--teal);font-weight:500;}
+.hero p.lede{margin-top:22px;font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:480px;}
+.hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:34px;margin-top:44px;padding-top:24px;border-top:1px solid var(--line);}
+.hero-stats .stat b{font-family:'Fraunces',serif;font-size:26px;font-weight:600;display:block;}
+.hero-stats .stat span{font-size:12.5px;color:var(--ink-soft);}
+.hero-visual{position:relative;height:440px;}
+.hero-visual svg{width:100%;height:100%;}
+.float-card{position:absolute;background:var(--white);border-radius:16px;box-shadow:0 18px 40px rgba(22,36,44,0.14);padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;}
+.float-card.weather{top:18px;right:6px;} .float-card.permit{bottom:26px;left:-10px;}
+.dot-teal{width:9px;height:9px;border-radius:50%;background:var(--teal);}
+.dot-coral{width:9px;height:9px;border-radius:50%;background:var(--coral);}
+.coordbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink);color:var(--white);overflow:hidden;}
+.coordbar-track{display:flex;gap:60px;padding:13px 0;white-space:nowrap;}
+.coordbar-track span{font-family:'Space Mono',monospace;font-size:12px;opacity:0.75;}
+.coordbar-track span b{color:var(--pink);font-weight:700;}
+.dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.dest-card{border-radius:20px;overflow:hidden;background:var(--white);border:1px solid var(--line);}
+.dest-media{height:170px;}
+.dest-media svg{width:100%;height:100%;}
+.dest-body{padding:20px 20px 24px;}
+.dest-body h3{font-size:19px;margin:8px 0;}
+.dest-body p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin:0 0 14px;}
+.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.feat-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;}
+.feat-card .num{font-family:'Space Mono',monospace;color:var(--coral);font-size:12px;}
+.feat-card h4{margin:10px 0 6px;font-size:16px;}
+.feat-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin:0;}
+@media(max-width:860px){.hero-inner{grid-template-columns:1fr;}.hero-visual{height:260px;order:-1;}.hero h1{font-size:36px;}.dest-grid,.feature-strip{grid-template-columns:1fr 1fr;}}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Bajoverse</span></div>
+    <div class="nav-links">
+      <a href="01-beranda.html" class="active">Beranda</a>
+      <a href="02-peta-interaktif.html" class="">Jelajahi</a>
+      <a href="03-detail-destinasi.html" class="">Destinasi</a>
+      <a href="04-trip-planner.html" class="">Rencanakan</a>
+      <a href="05-direktori-operator.html" class="">Operator</a>
+      <a href="08-paket-sailing.html" class="">Sailing</a>
+      <a href="07-toko-merch.html" class="">Toko</a>
+      <a href="06-panduan-budaya-keselamatan.html" class="">Panduan</a>
+    </div>
+    <div class="nav-cta">
+      <div class="lang-switch">ID · EN</div>
+      <a class="btn" href="04-trip-planner.html">Mulai Rencana</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Destinasi Super Prioritas</div>
+      <h1>Labuan Bajo,<br><em>dari pasir merah muda</em><br>ke layar Anda.</h1>
+      <p class="lede">Bajoverse membantu Anda merencanakan, memesan, dan memahami Labuan Bajo — dari izin masuk Taman Nasional Komodo sampai operator kapal yang benar-benar terverifikasi.</p>
+      <div class="hero-actions">
+        <a class="btn coral" href="04-trip-planner.html">Susun Itinerary Saya</a>
+        <a class="btn outline" href="02-peta-interaktif.html">Jelajahi Peta Interaktif</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>7</b><span>Destinasi utama terpetakan</span></div>
+        <div class="stat"><b>24+</b><span>Operator terverifikasi</span></div>
+        <div class="stat"><b>6</b><span>Dimensi pengalaman diuji (UEQ)</span></div>
+      </div>
+    </div>
+<div class="hero-visual">
+      
+      <!-- Hapus semua tag <svg> beserta isinya, ganti dengan tag <img> ini -->
+      <img src="bajo1.jpeg" alt="Pemandangan Labuan Bajo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 28px;">
+      
+      <!-- Float card biarin aja di sini biar tetap melayang di atas gambar -->
+      <div class="float-card weather"><span class="dot-teal"></span> Laut tenang · 29°C</div>
+      <div class="float-card permit"><span class="dot-coral"></span> Izin TNK tersedia hari ini</div>
+      
+    </div>
+  </div>
+</section>
+
+<div class="coordbar"><div class="coordbar-track">
+
+<span><b>8°35'55"S 119°41'46"E</b> — Pink Beach</span>
+
+<span><b>8°37'53"S 119°34'50"E</b> — Pulau Padar</span>
+
+<span><b>8°34'54"S 119°29'34"E</b> — Pulau Komodo</span>
+
+<span><b>8°39'42"S 119°40'22"E</b> — Pulau Rinca</span>
+
+<span><b>8°45'56"S 120°10'59"E</b> — Wae Rebo</span>
+
+</div></div>
+
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Setiap fitur, satu tujuan: bikin Labuan Bajo gampang direncanakan.</h2>
+      <p>Enam halaman inti Bajoverse — tiap fitur berdiri sebagai halaman sendiri.</p>
+    </div>
+    <div class="feature-strip">
+      <div class="feat-card"><span class="num">02</span><h4>Peta Interaktif</h4><p>Filter destinasi by aktivitas, lihat semua pulau dalam satu peta.</p></div>
+      <div class="feat-card"><span class="num">03</span><h4>Detail Destinasi</h4><p>Info lengkap tiap pulau + etika kunjungan + ulasan wisatawan.</p></div>
+      <div class="feat-card"><span class="num">04</span><h4>Trip Planner</h4><p>Susun itinerary harian, terintegrasi status izin & cuaca.</p></div>
+      <div class="feat-card"><span class="num">05</span><h4>Direktori Operator</h4><p>Bandingkan kapal & pemandu terverifikasi berdasar harga dan rating.</p></div>
+      <div class="feat-card"><span class="num">06</span><h4>Panduan Budaya &amp; Keselamatan</h4><p>Etika kunjungan taman nasional, kontak darurat, tips lokal.</p></div>
+      <div class="feat-card"><span class="num">01</span><h4>Beranda</h4><p>Titik masuk yang merangkum semua fitur di atas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Destinasi unggulan</h2>
+      <p>Klik untuk lihat detail lengkap tiap pulau.</p>
+    </div>
+    <div class="dest-grid">
+      <a class="dest-card" href="03-detail-destinasi.html">
+        <div class="dest-media">
+          <!-- Hapus SVG lama, ganti dengan tag img ini -->
+          <img src="pinkbeach.jpeg" alt="Pemandangan Pantai Merah Muda yang indah" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="dest-body">
+          <span class="coord">8°35'55"S — Pink Beach</span>
+          <h3>Pantai Merah Muda</h3>
+          <p>Warna pasir dari organisme Foraminifera.</p>
+        </div>
+      </a>
+      
+      <!-- Kartu 2: Padar Island -->
+      <a class="dest-card" href="03-detail-destinasi.html">
+        <div class="dest-media">
+          <!-- Hapus SVG lama, ganti dengan tag img ini -->
+          <img src="padar.jpg" alt="Pemandangan dari puncak Pulau Padar" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="dest-body">
+          <span class="coord">8°37'53"S — Pulau Padar</span>
+          <h3>Padar Island</h3>
+          <p>Titik pandang tiga teluk yang ikonik.</p>
+        </div>
+      </a>
+      
+      <!-- Kartu 3: Taman Nasional Komodo -->
+      <a class="dest-card" href="03-detail-destinasi.html">
+        <div class="dest-media">
+          <!-- Hapus SVG lama, ganti dengan tag img ini -->
+          <img src="komodo.jpg" alt="Komodo di habitat aslinya di Taman Nasional" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="dest-body">
+          <span class="coord">8°34'54"S — Pulau Komodo</span>
+          <h3>Taman Nasional Komodo</h3>
+          <p>Habitat asli komodo, wajib didampingi ranger.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo" style="color:#fff;">Bajoverse</span></div>
+      <p style="font-size:13px;line-height:1.6;margin-top:14px;max-width:260px;color:rgba(255,255,255,0.6);">Platform digital resmi pendukung Labuan Bajo sebagai Destinasi Pariwisata Super Prioritas.</p>
+    </div>
+    <div><h5>Jelajahi</h5><ul><li>Peta interaktif</li><li>Pink Beach</li><li>Golo Mori</li><li>Taman Nasional Komodo</li><li>Wae Rebo</li></ul></div>
+    <div><h5>Layanan</h5><ul><li>Susun itinerary</li><li>Paket sailing</li><li>Toko merch</li><li>Operator terverifikasi</li></ul></div>
+    <div><h5>Tentang</h5><ul><li>Konservasi &amp; keberlanjutan</li><li>Panduan budaya lokal</li><li>Bahasa Indonesia / English</li><li>Kontak darurat</li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Bajoverse —Labuan Bajo</span>
+    <span> </span>
+  </div>
+</footer>
+</body>
+</html>
